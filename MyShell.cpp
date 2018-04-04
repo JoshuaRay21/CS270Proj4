@@ -48,9 +48,8 @@ void changePrompt(vector<string> tokens) {
 
 int main() {
     string command;
-    char *parameters[PARAMETERSMAX];
-    char *envp[] = { (char*) "PATH!=bin", 0 };
-
+    vector<string> parameters;
+    string envp = "PATH";
     while (true) {
         cout << prompt;
         getline(cin, command);
