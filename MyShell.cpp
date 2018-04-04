@@ -45,39 +45,52 @@ void execCommand(vector<string> tokens) {
 	//keep creating else if's for rest of commands
 }
 void setvar(vector<string> tokens) {
-	if (tokens.size() > 3) {
-		if (tokens[3] != '#') {
-			perror("Too many arguments for setvar");
-			return;
-		}
-	}
-	if (tokens.size() < 3) {
-		perror("Too few arguments for setvar");
+	if (errorchecker(tokens, 3)) {
 		return;
 	}
 	string variable = tokens[1];
-	if (variable == "#") {
-		perror("Too few arguments for setvar");
-		return;
-	}
+	
+	//if the first character in the variable is not a letter
 	if (!isalpha(variable[0])) {
-		perror("Variable names must start with a letter.");
+		fprintf(stderr,"Variable names must start with a letter.");
 		return;
 	}
+	//if the variable consists of anything other than letters/numbers
 	for (int i = 1; i < variable.length(); i++) {
 		if (!isalnum(variable[i])) {
-			perror("Variable names must only consist of letters and numbers.");
+			fprintf(stderr,"Variable names must only consist of letters and numbers.");
+			return;
 		}
 	}
 	string value = tokens[2];
-	if (value == "#") {
-		perror("Too few arguments for setvar");
-		return;
-	}
+	
 	variables.insert(pair<string, string>(variable, value));
 
 }
+//returns true if there is an error relating to number of tokens
+bool errorchecker(vector<string> tokens, int wantedArguements) {
+	if (tokens.size()>wantedArguements) {
+		if (tokens[wantedArguements] != "#") {
+			fprintf(stderr,"Too many arguements for %s\n", tokens[0]);
+			return true;
+		}
+	}
+	if (tokens.size() < wantedArguements) {
+		fprintf(stderr,"Too few arguements for %s\n", tokens[0]);
+		return true;
+	}
+	for (int i = 1; i < wantedArguements; i++) {
+		if (tokens[i]=="#") {
+			fprintf(stderr, "Too few arguements for %s\n", tokens[0]);
+			return true;
+		}
+	}
+	return false;
+}
 void changePrompt(vector<string> tokens) {
+	if (errorchecker(tokens, 2)) {
+		return;
+	}
 	prompt = tokens[1];
 }
 
@@ -90,6 +103,7 @@ int main() {
 		getline(cin, command);
 		cout << "Command: \"" << command << "\"!\n";
 		vector<string> tokens = createTokens(command);
+		execCommand(tokens);
 		if (ShowTokens)
 			for (auto& str : tokens)
 				cout << str << endl;
