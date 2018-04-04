@@ -49,6 +49,9 @@ void execCommand(vector<string> tokens) {
 	else if (command = "showprocs") {
 		showprocs(tokens);
 	}
+	else if (command = "#") {
+
+	}
 	//keep creating else if's for rest of commands
 }
 void showprocs(vector<string> tokens) {
