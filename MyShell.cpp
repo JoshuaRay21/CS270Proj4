@@ -22,7 +22,7 @@ bool errorchecker(vector<string> tokens, int wantedArguements);
 string ShowTokens = "0";
 map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
-//The 2 above vectors should be thought of as parallel, 
+vector<string> procs; //vec of processes running in background
 
 vector<string> createTokens(string str) {
 	istringstream iss(str);
@@ -43,10 +43,18 @@ void execCommand(vector<string> tokens) {
 	else if (command == "setprompt") {
 		changePrompt(tokens);
 	}
-	else if () {
-
+	else if (command = "setdir") {
+		//JRAY DOESNT KNOW HOW TO DEAL WITH DIRECTORY
+	}
+	else if (command = "showprocs") {
+		showprocs(tokens);
 	}
 	//keep creating else if's for rest of commands
+}
+void showprocs(vector<string> tokens) {
+	errorchecker(tokens, 1);
+	for (auto& str : procs)
+		cout << str << endl;
 }
 void doRun(vector<string> tokens) {
 }
