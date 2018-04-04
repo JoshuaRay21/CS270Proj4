@@ -59,6 +59,9 @@ void execCommand(vector<string> tokens) {
 	else if (command == "done") {
 		done(tokens);
 	}
+	else if (command == "run") {
+		doRun(tokens);
+	}
 	//keep creating else if's for rest of commands
 }
 void done(vector<string> tokens) {
@@ -91,6 +94,7 @@ void showprocs(vector<string> tokens) {
 		cout << str << endl;
 }
 void doRun(vector<string> tokens) {
+
 }
 void doFly(vector<string> tokens) {
 }
@@ -122,10 +126,6 @@ void setvar(vector<string> tokens) {
 	if (variable == "ShowTokens") {
 		ShowTokens = value;
 	}
-		perror("Too few arguments for setvar");
-	if (tokens.size() < 3) {
-	}
-	variables.insert(pair<string, string>(variable, value));
 	else
 		variables.insert(pair<string, string>(variable, value));
 
