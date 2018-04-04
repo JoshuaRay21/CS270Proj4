@@ -14,8 +14,9 @@ void execCommand(vector<string> tokens);
 vector<string> createTokens(string str);
 void changePrompt(vector<string> tokens);
 void setvar(vector<string> tokens);
+bool errorchecker(vector<string> tokens, int wantedArguements);
 
-bool ShowTokens = false;
+string ShowTokens = "0";
 map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
 //The 2 above vectors should be thought of as parallel, 
@@ -63,8 +64,11 @@ void setvar(vector<string> tokens) {
 		}
 	}
 	string value = tokens[2];
-	
-	variables.insert(pair<string, string>(variable, value));
+	if (variable == "ShowTokens") {
+		ShowTokens = value;
+	}
+	else
+		variables.insert(pair<string, string>(variable, value));
 
 }
 //returns true if there is an error relating to number of tokens
@@ -104,7 +108,7 @@ int main() {
 		cout << "Command: \"" << command << "\"!\n";
 		vector<string> tokens = createTokens(command);
 		execCommand(tokens);
-		if (ShowTokens)
+		if (ShowTokens=="1")
 			for (auto& str : tokens)
 				cout << str << endl;
 	}
