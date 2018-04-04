@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <map>
 
 #define PARAMETERSMAX 20
 
@@ -17,11 +18,8 @@ void doFly(vector<string> tokens);
 void doTovar(vector<string> tokens);
 
 bool ShowTokens = false;
+map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
-
-vector<string> variableNames;
-vector<string> variableValues;
-
 //The 2 above vectors should be thought of as parallel, 
 
 vector<string> createTokens(string str) {
@@ -44,12 +42,48 @@ void execCommand(vector<string> tokens) {
     }
     //keep creating else if's for rest of commands
 }
+<<<<<<< HEAD
 void doRun(vector<string> tokens) {
 }
 void doFly(vector<string> tokens) {
 }
 void doTovar(vector<string> tokens) {
 }
+=======
+void setvar(vector<string> tokens) {
+	if (tokens.size() > 3) {
+		if (tokens[3] != '#') {
+			return;
+			perror("Too many arguments for setvar");
+		}
+}
+	
+	variables.insert(pair<string, string>(variable, value));
+		perror("Too few arguments for setvar");
+		return;
+	}
+	if (value == "#") {
+	}
+	string value = tokens[2];
+	for (int i = 1; i < variable.length(); i++) {
+		}
+			perror("Variable names must only consist of letters and numbers.");
+		if (!isalnum(variable[i])) {
+	}
+		return;
+		perror("Variable names must start with a letter.");
+	if (!isalpha(variable[0])) {
+	}
+		return;
+		perror("Too few arguments for setvar");
+	if (variable == "#") {
+	string variable = tokens[1];
+		return;
+	}
+		perror("Too few arguments for setvar");
+	if (tokens.size() < 3) {
+	}
+>>>>>>> 1339c34af676274f859e3aa4565fbf8394f78aa5
 
 void changePrompt(vector<string> tokens) {
     prompt = tokens[1];
