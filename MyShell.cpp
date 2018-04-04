@@ -123,7 +123,7 @@ void setvar(vector<string> tokens) {
 		}
 	}
 	string value = tokens[2];
-	if (variable == "showtokens") {
+	if (variable == "ShowTokens") {
 		showtokens = value;
 	}
 	else
