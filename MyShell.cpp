@@ -7,30 +7,28 @@
 #include <map>
 #include <unistd.h>
 
-#define PARAMETERSMAX 20
-
 using namespace std;
 
-void execCommand(vector<string> tokens);
-vector<string> createTokens(string str);
-void changePrompt(vector<string> tokens);
+void execcommand(vector<string> tokens);
+vector<string> createtokens(string str);
+void changeprompt(vector<string> tokens);
 void setvar(vector<string> tokens);
-void doRun(vector<string> tokens);
-void doFly(vector<string> tokens);
-void doTovar(vector<string> tokens);
-bool errorchecker(vector<string> tokens, int wantedArguements);
+void dorun(vector<string> tokens);
+void dofly(vector<string> tokens);
+void dotovar(vector<string> tokens);
+bool errorchecker(vector<string> tokens, int wantedarguements);
 void showprocs(vector<string> tokens);
 void done(vector<string> tokens);
 int setdir(vector<string> tokens);
 
 
-string ShowTokens = "0";
+string showtokens = "0";
 map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
 
-vector<string> createTokens(string str) {
+vector<string> createtokens(string str) {
 	istringstream iss(str);
 	vector<string> tokens;
 	string s;
@@ -41,13 +39,13 @@ vector<string> createTokens(string str) {
 
 	return tokens;
 }
-void execCommand(vector<string> tokens) {
+void execcommand(vector<string> tokens) {
 	string command = tokens[0];
 	if (command == "setvar") {
 		setvar(tokens);
 	}
 	else if (command == "setprompt") {
-		changePrompt(tokens);
+		changeprompt(tokens);
 	}
 	else if (command == "setdir") {
 		setdir(tokens);
@@ -62,7 +60,7 @@ void execCommand(vector<string> tokens) {
 		done(tokens);
 	}
 	else if (command == "run") {
-		doRun(tokens);
+		dorun(tokens);
 	}
 	//keep creating else if's for rest of commands
 }
@@ -95,12 +93,12 @@ void showprocs(vector<string> tokens) {
 	for (auto& str : procs)
 		cout << str << endl;
 }
-void doRun(vector<string> tokens) {
+void dorun(vector<string> tokens) {
 
 }
-void doFly(vector<string> tokens) {
+void dofly(vector<string> tokens) {
 }
-void doTovar(vector<string> tokens) {
+void dotovar(vector<string> tokens) {
 }
 void setvar(vector<string> tokens) {
 	if (errorchecker(tokens, 3)) {
@@ -125,8 +123,8 @@ void setvar(vector<string> tokens) {
 		}
 	}
 	string value = tokens[2];
-	if (variable == "ShowTokens") {
-		ShowTokens = value;
+	if (variable == "showtokens") {
+		showtokens = value;
 	}
 	else
 		variables.insert(pair<string, string>(variable, value));
@@ -144,18 +142,18 @@ int setdir(vector<string> tokens) {
 	return 0;
 }
 //returns true if there is an error relating to number of tokens
-bool errorchecker(vector<string> tokens, int wantedArguements) {
-	if (tokens.size()>wantedArguements) {
-		if (tokens[wantedArguements] != "#") {
+bool errorchecker(vector<string> tokens, int wantedarguements) {
+	if (tokens.size()>wantedarguements) {
+		if (tokens[wantedarguements] != "#") {
 			fprintf(stderr,"Too many arguements for %s\n", tokens[0].c_str());
 			return true;
 		}
 	}
-	if (tokens.size() < wantedArguements) {
+	if (tokens.size() < wantedarguements) {
 		fprintf(stderr,"Too few arguements for %s\n", tokens[0].c_str());
 		return true;
 	}
-	for (int i = 1; i < wantedArguements; i++) {
+	for (int i = 1; i < wantedarguements; i++) {
 		if (tokens[i]=="#") {
 			fprintf(stderr, "Too few arguements for %s\n", tokens[0].c_str());
 			return true;
@@ -163,7 +161,7 @@ bool errorchecker(vector<string> tokens, int wantedArguements) {
 	}
 	return false;
 }
-void changePrompt(vector<string> tokens) {
+void changeprompt(vector<string> tokens) {
 	if (errorchecker(tokens, 2)) {
 		return;
 	}
@@ -178,12 +176,12 @@ int main() {
 		cout << prompt;
 		getline(cin, command);
 		cout << "Command: \"" << command << "\"!\n";
-		vector<string> tokens = createTokens(command);
-		execCommand(tokens);
+		vector<string> tokens = createtokens(command);
+		execcommand(tokens);
 		if (exiting > -1) {
 			return exiting;
 		}
-		if (ShowTokens=="1")
+		if (showtokens=="1")
 			for (auto& str : tokens)
 				cout << str << endl;
 	}
