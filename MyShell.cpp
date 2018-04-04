@@ -6,6 +6,9 @@
 
 #define PARAMETERSMAX 20
 bool ShowTokens = false;
+vector<string> variableNames;
+vector<string> variableValues;
+//The 2 above vectors should be thought of as parallel, 
 
 using namespace std;
 
@@ -19,6 +22,13 @@ vector<string> createTokens(string str) {
     }
 
     return tokens;
+}
+void execCommand(vector<string> tokens) {
+	string command = tokens[0];
+	if (strcmp(command, "setvar") == 0) {
+		setvar();
+	}
+	//keep creating else if's for rest of commands
 }
 
 int main() {
