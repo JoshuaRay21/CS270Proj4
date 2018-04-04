@@ -3,25 +3,29 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#define PARAMETERSMAX 20
+using namespace std;
+void printTokens(istringstream iss) {
+    vector<string> v;
+    istringstream s;
 
-void printTokens(std::istringstream iss) {
-    std::vector<std::string> v;
-    std::istringstream s;
-
-    while (iss >> std::quoted(s)) {
+    while (iss >> quoted(s)) {
         v.push_back(s);
     }
 
     for(auto& str: v)
-        std::cout << str << std::endl;
+        cout << str << std::endl;
 }
 
 int main() {
-    std::string command;
+	string cmd;
+    string command;
+	char *parameters[PARAMETERSMAX];
+
     while (true) {
-        std::cout << "Enter command: ";
-        std::getline(std::cin, command);
-        std::cout << "Command: \"" << command << "\"!\n";
+        cout << "Enter command: ";
+        getline(std::cin, command);
+        cout << "Command: \"" << command << "\"!\n";
         printTokens(command);
     }
     return 0;
