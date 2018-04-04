@@ -25,6 +25,7 @@ void done(vector<string> tokens);
 string ShowTokens = "0";
 map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
+string workingDir = "";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
 
@@ -129,6 +130,10 @@ void setvar(vector<string> tokens) {
 	else
 		variables.insert(pair<string, string>(variable, value));
 
+}
+void setdir(vector<string> tokens) {
+	workingDir = tokens[1];
+	// TODO: check if valid directory and right number of args
 }
 //returns true if there is an error relating to number of tokens
 bool errorchecker(vector<string> tokens, int wantedArguements) {
