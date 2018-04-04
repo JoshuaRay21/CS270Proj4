@@ -12,6 +12,9 @@ void execCommand(vector<string> tokens);
 vector<string> createTokens(string str);
 void changePrompt(vector<string> tokens);
 void setvar(vector<string> tokens);
+void doRun(vector<string> tokens);
+void doFly(vector<string> tokens);
+void doTovar(vector<string> tokens);
 
 bool ShowTokens = false;
 string prompt = "msh > ";
@@ -40,6 +43,12 @@ void execCommand(vector<string> tokens) {
         changePrompt(tokens);
     }
     //keep creating else if's for rest of commands
+}
+void doRun(vector<string> tokens) {
+}
+void doFly(vector<string> tokens) {
+}
+void doTovar(vector<string> tokens) {
 }
 
 void changePrompt(vector<string> tokens) {
