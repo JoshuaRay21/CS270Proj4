@@ -139,17 +139,17 @@ void setdir(vector<string> tokens) {
 bool errorchecker(vector<string> tokens, int wantedArguements) {
 	if (tokens.size()>wantedArguements) {
 		if (tokens[wantedArguements] != "#") {
-			fprintf(stderr,"Too many arguements for %s\n", tokens[0]);
+			fprintf(stderr,"Too many arguements for %s\n", tokens[0].c_str());
 			return true;
 		}
 	}
 	if (tokens.size() < wantedArguements) {
-		fprintf(stderr,"Too few arguements for %s\n", tokens[0]);
+		fprintf(stderr,"Too few arguements for %s\n", tokens[0].c_str());
 		return true;
 	}
 	for (int i = 1; i < wantedArguements; i++) {
 		if (tokens[i]=="#") {
-			fprintf(stderr, "Too few arguements for %s\n", tokens[0]);
+			fprintf(stderr, "Too few arguements for %s\n", tokens[0].c_str());
 			return true;
 		}
 	}
