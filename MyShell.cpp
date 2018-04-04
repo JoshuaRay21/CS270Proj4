@@ -70,10 +70,18 @@ void done(vector<string> tokens) {
 
 	}
 	else {
-		if(errorchecker(tokens, 2))
+		if (errorchecker(tokens, 2))
 			return;
 		string value = tokens[1];
-
+		for (int i = 0; i < value.length(); i++) {
+			if (isdigit(value[i])) {
+			}
+			else {
+				fprintf(stderr, "Values after done must only consist of numbers.");
+				return;
+			}
+		}
+		exiting = stoi(value);
 	}
 }
 void showprocs(vector<string> tokens) {
@@ -159,10 +167,13 @@ int main() {
 		cout << "Command: \"" << command << "\"!\n";
 		vector<string> tokens = createTokens(command);
 		execCommand(tokens);
+		if (exiting > -1) {
+			return exiting;
+		}
 		if (ShowTokens=="1")
 			for (auto& str : tokens)
 				cout << str << endl;
 	}
-	return 0;
+	return -1; // this should never be called, so i wanted to make it an error if it is called
 }
 
