@@ -1,3 +1,4 @@
+//pushing this again
 #include <string>
 #include <vector>
 #include <sstream>
@@ -37,6 +38,9 @@ void execCommand(vector<string> tokens) {
 	}
 	else if (command == "setprompt") {
 		changePrompt(tokens);
+	}
+	else if () {
+
 	}
 	//keep creating else if's for rest of commands
 }
