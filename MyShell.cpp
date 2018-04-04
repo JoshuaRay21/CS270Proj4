@@ -3,11 +3,11 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <map>
 
 #define PARAMETERSMAX 20
 bool ShowTokens = false;
-vector<string> variableNames;
-vector<string> variableValues;
+map<string, string> variables; //1st string is the name, 2nd is value
 //The 2 above vectors should be thought of as parallel, 
 
 using namespace std;
@@ -30,7 +30,39 @@ void execCommand(vector<string> tokens) {
 	}
 	//keep creating else if's for rest of commands
 }
-
+void setvar(vector<string> tokens) {
+	if (tokens.size() > 3) {
+		if (tokens[3] != '#') {
+			perror("Too many arguments for setvar");
+			return;
+		}
+	}
+	if (tokens.size() < 3) {
+		perror("Too few arguments for setvar");
+		return;
+	}
+	string variable = tokens[1];
+	if (variable == "#") {
+		perror("Too few arguments for setvar");
+		return;
+	}
+	if (!isalpha(variable[0])) {
+		perror("Variable names must start with a letter.");
+		return;
+	}
+	for (int i = 1; i < variable.length(); i++) {
+		if (!isalnum(variable[i])) {
+			perror("Variable names must only consist of letters and numbers.");
+		}
+	}
+	string value = tokens[2];
+	if (value == "#") {
+		perror("Too few arguments for setvar");
+		return;
+	}
+	variables.insert(pair<string, string>(variable, value));
+	
+}
 int main() {
     string cmd;
     string command;
