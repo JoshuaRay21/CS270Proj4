@@ -5,17 +5,20 @@
 #include <iomanip>
 
 #define PARAMETERSMAX 20
+bool ShowTokens = true;
+
 using namespace std;
-void printTokens(string str) {
+
+vector<string> createTokens(string str) {
     istringstream iss(str);
-    vector<string> v;
+    vector<string> tokens;
     string s;
 
     while (iss >> quoted(s)) {
-        v.push_back(s);
+        tokens.push_back(s);
     }
-    for(auto& str: v)
-        cout << str << endl;
+
+    return tokens;
 }
 
 int main() {
@@ -27,7 +30,10 @@ int main() {
         cout << "Enter command: ";
         getline(cin, command);
         cout << "Command: \"" << command << "\"!\n";
-        printTokens(command);
+        vector<string> tokens = createTokens(command);
+        if (ShowTokens)
+            for(auto& str: tokens)
+                cout << str << endl;
     }
     return 0;
 }
