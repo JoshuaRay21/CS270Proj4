@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
+#include <unistd.h>
 
 #define PARAMETERSMAX 20
 
@@ -20,12 +21,12 @@ void doTovar(vector<string> tokens);
 bool errorchecker(vector<string> tokens, int wantedArguements);
 void showprocs(vector<string> tokens);
 void done(vector<string> tokens);
+int setdir(vector<string> tokens);
 
 
 string ShowTokens = "0";
 map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
-string workingDir = "";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
 
@@ -49,7 +50,7 @@ void execCommand(vector<string> tokens) {
 		changePrompt(tokens);
 	}
 	else if (command == "setdir") {
-		//JRAY DOESNT KNOW HOW TO DEAL WITH DIRECTORY
+		setdir(tokens);
 	}
 	else if (command == "showprocs") {
 		showprocs(tokens);
@@ -131,9 +132,16 @@ void setvar(vector<string> tokens) {
 		variables.insert(pair<string, string>(variable, value));
 
 }
-void setdir(vector<string> tokens) {
-	workingDir = tokens[1];
-	// TODO: check if valid directory and right number of args
+int setdir(vector<string> tokens) {
+	if (errorchecker(tokens, 2)) {
+		return -1;
+	}
+	int code = chdir(tokens[1].c_str());
+	if (code != 0) {
+		fprintf(stderr, "%s: No such directory", tokens[1].c_str());
+		return -1;
+	}
+	return 0;
 }
 //returns true if there is an error relating to number of tokens
 bool errorchecker(vector<string> tokens, int wantedArguements) {
