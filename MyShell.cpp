@@ -82,7 +82,7 @@ void done(vector<string> tokens) {
 			if (isdigit(value[i])) {
 			}
 			else {
-				fprintf(stderr, "Values after done must only consist of numbers.");
+				fprintf(stderr, "Values after done must only consist of numbers.\n");
 				return;
 			}
 		}
@@ -112,15 +112,15 @@ void setvar(vector<string> tokens) {
 	if (isalpha(variable[0])) {
 	}
 	else{
-		fprintf(stderr,"Variable names must start with a letter.");
+		fprintf(stderr,"Variable names must start with a letter.\n");
 		return;
 	}
 	//if the variable consists of anything other than letters/numbers
 	for (int i = 1; i < variable.length(); i++) {
-		if (isalnum(variable[i])) {
+		if (isalpha(variable[i]) || isdigit(variable[i])) {
 		}
 		else{
-			fprintf(stderr,"Variable names must only consist of letters and numbers.");
+			fprintf(stderr,"Variable names must only consist of letters and numbers.\n");
 			return;
 		}
 	}
@@ -138,7 +138,7 @@ int setdir(vector<string> tokens) {
 	}
 	int code = chdir(tokens[1].c_str());
 	if (code != 0) {
-		fprintf(stderr, "%s: No such directory", tokens[1].c_str());
+		fprintf(stderr, "%s: No such directory\n", tokens[1].c_str());
 		return -1;
 	}
 	return 0;
