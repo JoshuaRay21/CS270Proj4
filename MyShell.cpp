@@ -126,6 +126,7 @@ void dorun(vector<string> tokens, int which) {
 		printf("executing %s...\n", args[0]);
 		execvp(args[0], args);
 	}
+	waitpid(pid, NULL, 0);
 }
 void dofly(vector<string> tokens) {
 }
