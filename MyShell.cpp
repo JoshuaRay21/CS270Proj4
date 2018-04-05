@@ -67,7 +67,7 @@ void execcommand(vector<string> tokens) {
 	} else if (command == "run") {
 		dorun(tokens, 0);
 	} else if (command == "fly") {
-		dorun(tokens, 0);
+		dofly(tokens);
 	}
 	//keep creating else if's for rest of commands
 }
@@ -130,9 +130,12 @@ void dorun(vector<string> tokens, int which) {
 	if(which == 0) {
 		waitpid(pid, NULL, 0);
 	}
+	printf("Done running!\n");
 }
 void dofly(vector<string> tokens) {
+	printf("Doing a fly!\n");
 	dorun(tokens, 1);
+	printf("Done flying!\n");
 }
 void dotovar(vector<string> tokens) {
 }
