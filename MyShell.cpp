@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <map>
 #include <unistd.h>
+#include <stdio.h>
+
 
 using namespace std;
 
@@ -95,7 +97,11 @@ void showprocs(vector<string> tokens) {
 		cout << str << endl;
 }
 void dorun(vector<string> tokens) {
-
+	int pid = fork();
+	char* const args[] = {"ls","/usr"};
+	if (pid==0) {
+		execvp("ls", args);
+	}
 }
 void dofly(vector<string> tokens) {
 }
