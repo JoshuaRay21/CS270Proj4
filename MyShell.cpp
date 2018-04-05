@@ -9,6 +9,9 @@
 #include <stdio.h>
 
 
+#define MAX_ARGS 20
+
+
 using namespace std;
 
 void execcommand(vector<string> tokens);
@@ -103,12 +106,12 @@ void dorun(vector<string> tokens) {
 		errorchecker(tokens, 2);
 		return;
 	}
-	const char* args[tokens.size()];
+	char* args[tokens.size()];
 	int pid = fork();
 	//char* const args[] = {"ls","/usr"};
 	for (int i = 1; i < tokens.size(); i++) {
 		//args[i-1] = (char*)tokens[i];
-		args[i - 1] = tokens[i].c_str();
+		args[i - 1] = const_cast<char*>(tokens[i].c_str());
 	}
 	printf("PID: %d\n", pid);
 	if (pid==0) {
