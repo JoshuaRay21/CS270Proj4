@@ -139,11 +139,11 @@ void dorun(vector<string> tokens, int which) {
 	
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
+		printf("Pushing proc: %s", tokens[1].c_str());
+		procs.push_back(tokens[1]);
 		execvp(args[0], args);
 	}
 	if (pid != firstFork && which == 1) {
-		printf("Pushing proc: %s", tokens[1].c_str());
-		procs.push_back(tokens[1]);
 		waitpid(pid, NULL, 0); 
 		//TAKING THIS LINE OUT
 		//procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
