@@ -18,7 +18,7 @@ void execcommand(vector<string> tokens);
 vector<string> createtokens(string str);
 void changeprompt(vector<string> tokens);
 void setvar(vector<string> tokens);
-void dorun(vector<string> tokens);
+void dorun(vector<string> tokens, int which);
 void dofly(vector<string> tokens);
 void dotovar(vector<string> tokens);
 bool errorchecker(vector<string> tokens, int wantedarguments);
@@ -68,7 +68,7 @@ void execcommand(vector<string> tokens) {
 		done(tokens);
 	}
 	else if (command == "run") {
-		dorun(tokens);
+		dorun(tokens, 0);
 	}
 	//keep creating else if's for rest of commands
 }
@@ -101,7 +101,8 @@ void showprocs(vector<string> tokens) {
 	for (auto& str : procs)
 		cout << str << endl;
 }
-void dorun(vector<string> tokens) {
+//which is 0 for run, 1 for fly, 2 for tovar
+void dorun(vector<string> tokens, int which) {
 	if (tokens.size() < 2) {
 		errorchecker(tokens, 2);
 		return;
