@@ -103,11 +103,11 @@ void dorun(vector<string> tokens) {
 		errorchecker(tokens, 2);
 		return;
 	}
-	char* const args[tokens.size()-1];
+	char* args[tokens.size()-1];
 	int pid = fork();
 	//char* const args[] = {"ls","/usr"};
 	for (int i = 1; i < tokens.size(); i++) {
-		args[i-1] = (char *const)tokens[i];
+		args[i-1] = (char*)tokens[i];
 	}
 	printf("PID: %d\n", pid);
 	if (pid==0) {
