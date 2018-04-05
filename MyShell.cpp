@@ -37,6 +37,8 @@ vector<string> createtokens(string str) {
 	string s;
 
 	while (iss >> quoted(s)) {
+		if (s[0] == '#')
+			break;
 		tokens.push_back(s);
 	}
 
