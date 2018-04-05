@@ -97,8 +97,11 @@ void done(vector<string> tokens) {
 void showprocs(vector<string> tokens) {
 	if(errorchecker(tokens, 1))
 		return;
-	for (int i = 0; i < procs.size(); i++)
-		cout << procs[i] << endl;
+	printf("Showing procs:\n");
+	for (auto str: procs) {
+		printf("PROC: %s",str.c_str());
+	}
+	printf("Done showing procs!\n");
 }
 //which is 0 for run, 1 for fly, 2 for tovar
 void dorun(vector<string> tokens, int which) {
@@ -139,6 +142,7 @@ void dorun(vector<string> tokens, int which) {
 		execvp(args[0], args);
 	}
 	if (pid != firstFork && which == 1) {
+		printf("Pushing proc: %s", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		waitpid(pid, NULL, 0); 
 		//TAKING THIS LINE OUT
