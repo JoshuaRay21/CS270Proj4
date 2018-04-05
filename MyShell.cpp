@@ -127,7 +127,7 @@ void dorun(vector<string> tokens, int which) {
 	//}
 	int pid = fork();
 	printf("My PID is %d.\n", pid);
-	if (pid == 0) {
+	if (pid != 0) {
 		pid = fork();
 		printf("My PID is %d.\n", pid);
 	}
