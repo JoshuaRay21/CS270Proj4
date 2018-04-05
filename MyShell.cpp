@@ -27,6 +27,7 @@ map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
+string path = "/bin:/usr/bin";
 
 vector<string> createtokens(string str) {
 	istringstream iss(str);
@@ -125,6 +126,9 @@ void setvar(vector<string> tokens) {
 	string value = tokens[2];
 	if (variable == "ShowTokens") {
 		showtokens = value;
+	}
+	else if (variable == "PATH") {
+		path = value;
 	}
 	else
 		variables.insert(pair<string, string>(variable, value));
