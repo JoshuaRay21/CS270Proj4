@@ -97,7 +97,7 @@ void done(vector<string> tokens) {
 void showprocs(vector<string> tokens) {
 	if(errorchecker(tokens, 1))
 		return;
-	for (int i == 0; i < procs.size(); i++)
+	for (int i = 0; i < procs.size(); i++)
 		cout << procs[i] << endl;
 }
 //which is 0 for run, 1 for fly, 2 for tovar
