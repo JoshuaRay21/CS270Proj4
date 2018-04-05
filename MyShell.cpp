@@ -119,7 +119,7 @@ void dorun(vector<string> tokens) {
 	}
 	args[tokens.size() - 1] = NULL;
 	printf("PID: %d\n", pid);
-	printing args to see what args consists of
+	//printing args to see what args consists of
 	for (int i = 0; i < tokens.size(); i++) {
 		cout << args[i] << endl;
 	}
