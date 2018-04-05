@@ -115,7 +115,13 @@ void dorun(vector<string> tokens) {
 		//	param = variables.find(param.substr(1))->second;
 		//}
 		printf("adding token `%s` to `args` array in position `%d`.\n", str.c_str(), i);
-		args[i] = const_cast<char*>(str.c_str());
+		args[i-1] = const_cast<char*>(str.c_str());
+		//string param = tokens[i];
+		//cout << "tokens " << i << " is " << param << endl;
+		//if (param[0] == '^') {
+		//	param = variables.find(param.substr(1))->second;
+		//}
+		//args[i - 1] = const_cast<char*>(param.c_str());
 	}
 	args[tokens.size() - 1] = NULL;
 	printf("Full contents of args array:\n");
