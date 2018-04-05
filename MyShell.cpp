@@ -187,7 +187,7 @@ void setvar(vector<string> tokens) {
 		path = value;
 	}
 	else
-		variables.insert(pair<string, string>(variable, value));
+		variables[variable] = value;
 
 }
 int setdir(vector<string> tokens) {
