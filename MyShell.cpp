@@ -107,6 +107,9 @@ void dorun(vector<string> tokens, int which) {
 		errorchecker(tokens, 2);
 		return;
 	}
+	for (int i = 0; i<tokens.size()) {
+
+	}
 	char* args[tokens.size()];
 	for (int i=1; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
@@ -122,6 +125,10 @@ void dorun(vector<string> tokens, int which) {
 	//}
 	int pid = fork();
 	printf("My PID is %d.\n", pid);
+	if (pid == 0) {
+		pid = fork();
+		printf("My PID is %d.\n", pid);
+	}
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
 		execvp(args[0], args);
