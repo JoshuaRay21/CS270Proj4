@@ -121,6 +121,12 @@ void dorun(vector<string> tokens) {
 	printf("Full contents of args array:\n");
 	for (int i = 0; i < sizeof(args); i++) {
 		printf("ARG %d: %s\n", i, args[i]);
+		//string param = tokens[i];
+		//cout << tokens << i << " is " << param << endl;
+		//if (param[0] == '^') {
+		//	param = variables.find(param.substr(1))->second;
+		//}
+		//args[i - 1] = const_cast<char*>(param.c_str());
 	}
 	int pid = fork();
 	printf("PID: %d\n", pid);
