@@ -107,7 +107,7 @@ void dorun(vector<string> tokens) {
 	int pid = fork();
 	//char* const args[] = {"ls","/usr"};
 	for (int i = 1; i < tokens.size(); i++) {
-		args[i-1] = tokens[i];
+		args[i-1] = (char *const)tokens[i];
 	}
 	printf("PID: %d\n", pid);
 	if (pid==0) {
