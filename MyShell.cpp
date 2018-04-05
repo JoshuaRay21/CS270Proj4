@@ -107,22 +107,23 @@ void dorun(vector<string> tokens) {
 		return;
 	}
 	char* args[tokens.size()];
-	int pid = fork();
 	//char* const args[] = {"ls","/usr"};
-	for (int i = 1; i < tokens.size(); i++) {
+	for (int i=1; i<tokens.size(); i++) {
 		//args[i-1] = (char*)tokens[i];
-		string param = tokens[i];
-		if (param[0] == '^') {
-			param = variables.find(param.substr(1))->second;
-		}
-		args[i - 1] = const_cast<char*>(param.c_str());
+		string str = tokens[i];
+		//if (param[0] == '^') {
+		//	param = variables.find(param.substr(1))->second;
+		//}
+		printf("adding token `%s` to `args` array in position `%d`.\n", str.c_str(), i);
+		args[i] = const_cast<char*>(str.c_str());
 	}
 	args[tokens.size() - 1] = NULL;
-	printf("PID: %d\n", pid);
-	printing args to see what args consists of
-	for (int i = 0; i < tokens.size(); i++) {
-		cout << args[i] << endl;
+	printf("Full contents of args array:\n");
+	for (int i = 0; i < sizeof(args); i++) {
+		printf("ARG %d: %s\n", i, args[i]);
 	}
+	int pid = fork();
+	printf("PID: %d\n", pid);
 	if (pid==0) {
 		printf("executing %s...\n", args[0]);
 		execvp(args[0], args);
