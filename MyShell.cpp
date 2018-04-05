@@ -126,11 +126,9 @@ void dorun(vector<string> tokens, int which) {
 	//	printf("ARG %d: %s\n", i, args[i]);
 	//}
 	int pid = fork();
+	int pid = fork();
 	printf("My PID is %d.\n", pid);
-	if (pid != 0) {
-		pid = fork();
-		printf("My PID is %d.\n", pid);
-	}
+	
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
 		execvp(args[0], args);
