@@ -108,16 +108,15 @@ void dorun(vector<string> tokens) {
 	}
 	char* args[tokens.size()];
 	for (int i=1; i<tokens.size(); i++) {
-		string str = tokens[i];
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
 		//}
-		printf("adding token `%s` to `args` array in position `%d`.\n", str.c_str(), i);
-		args[i-1] = const_cast<char*>(str.c_str());
+		printf("adding token `%s` to `args` array in position `%d`.\n", tokens[i].c_str(), i);
+		args[i-1] = const_cast<char*>(tokens[i].c_str());
 	}
 	args[tokens.size() - 1] = NULL;
 	printf("Full contents of args array:\n");
-	for (int i = 0; i < sizeof(args); i++) {
+	for (int i = 0; i < sizeof(args)/sizeof(args[0]); i++) {
 		printf("ARG %d: %s\n", i, args[i]);
 	}
 	int pid = fork();
