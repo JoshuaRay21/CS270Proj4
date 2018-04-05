@@ -108,7 +108,9 @@ void dorun(vector<string> tokens, int which) {
 		return;
 	}
 	for (int i = 0; i<tokens.size()) {
-
+		if (tokens[i].substr(0, 1) == "^") {
+			tokens[i] = variables.find(tokens[i])->second;
+		}
 	}
 	char* args[tokens.size()];
 	for (int i=1; i<tokens.size(); i++) {
