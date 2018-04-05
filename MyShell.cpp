@@ -99,6 +99,7 @@ void showprocs(vector<string> tokens) {
 		cout << str << endl;
 }
 void dorun(vector<string> tokens) {
+	
 	int pid = fork();
 	char* const args[] = {"ls","/usr"};
 	printf("PID: %d\n", pid);
@@ -107,6 +108,16 @@ void dorun(vector<string> tokens) {
 		execvp("ls", args);
 	}
 }
+/*
+int findActualLength(vector<string> tokens) {
+	int i;
+	for (i = 1; i < tokens.size(); i++) {
+		if (tokens[i] == "#")
+			return i;
+	}
+	return i;
+}
+*/
 void dofly(vector<string> tokens) {
 }
 void dotovar(vector<string> tokens) {
