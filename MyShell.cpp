@@ -107,32 +107,18 @@ void dorun(vector<string> tokens) {
 		return;
 	}
 	char* args[tokens.size()];
-	//char* const args[] = {"ls","/usr"};
 	for (int i=1; i<tokens.size(); i++) {
-		//args[i-1] = (char*)tokens[i];
 		string str = tokens[i];
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
 		//}
 		printf("adding token `%s` to `args` array in position `%d`.\n", str.c_str(), i);
 		args[i-1] = const_cast<char*>(str.c_str());
-		//string param = tokens[i];
-		//cout << "tokens " << i << " is " << param << endl;
-		//if (param[0] == '^') {
-		//	param = variables.find(param.substr(1))->second;
-		//}
-		//args[i - 1] = const_cast<char*>(param.c_str());
 	}
 	args[tokens.size() - 1] = NULL;
 	printf("Full contents of args array:\n");
 	for (int i = 0; i < sizeof(args); i++) {
 		printf("ARG %d: %s\n", i, args[i]);
-		//string param = tokens[i];
-		//cout << tokens << i << " is " << param << endl;
-		//if (param[0] == '^') {
-		//	param = variables.find(param.substr(1))->second;
-		//}
-		//args[i - 1] = const_cast<char*>(param.c_str());
 	}
 	int pid = fork();
 	printf("PID: %d\n", pid);
@@ -141,16 +127,6 @@ void dorun(vector<string> tokens) {
 		execvp(args[0], args);
 	}
 }
-/*
-int findActualLength(vector<string> tokens) {
-	int i;
-	for (i = 1; i < tokens.size(); i++) {
-		if (tokens[i] == "#")
-			return i;
-	}
-	return i;
-}
-*/
 void dofly(vector<string> tokens) {
 }
 void dotovar(vector<string> tokens) {
