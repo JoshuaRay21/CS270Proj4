@@ -126,6 +126,7 @@ void dorun(vector<string> tokens, int which) {
 	//	printf("ARG %d: %s\n", i, args[i]);
 	//}
 	int pid = fork();
+	int firstFork = pid;
 	if (pid == 0) {
 		pid = fork();
 	}
@@ -134,11 +135,18 @@ void dorun(vector<string> tokens, int which) {
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
 		execvp(args[0], args);
+	}
+	if (pid == (firstFork + 1)&& which = 1) {
+		procs.push_back(tokens[1]);
+		waitpid(pid, NULL, 0); 
+		procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
 		printf("Done executing!\n");
+		exit(1);
 	}
 	if(which == 0) {
 		waitpid(pid, NULL, 0);
 	}
+
 	printf("Done running!\n");
 }
 void dofly(vector<string> tokens) {
