@@ -99,7 +99,9 @@ void showprocs(vector<string> tokens) {
 void dorun(vector<string> tokens) {
 	int pid = fork();
 	char* const args[] = {"ls","/usr"};
+	printf("PID: %d\n", pid);
 	if (pid==0) {
+		printf("executing ls...\n");
 		execvp("ls", args);
 	}
 }
