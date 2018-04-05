@@ -99,13 +99,16 @@ void showprocs(vector<string> tokens) {
 		cout << str << endl;
 }
 void dorun(vector<string> tokens) {
-	
+	char* const args[tokens.size()-1];
 	int pid = fork();
-	char* const args[] = {"ls","/usr"};
+	//char* const args[] = {"ls","/usr"};
+	for (int i = 1; i < tokens.size(); i++) {
+		args[i-1] = tokens[i];
+	}
 	printf("PID: %d\n", pid);
 	if (pid==0) {
-		printf("executing ls...\n");
-		execvp("ls", args);
+		printf("executing %s...\n", args[0]);
+		execvp(args[0], args);
 	}
 }
 /*
