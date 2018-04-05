@@ -99,6 +99,10 @@ void showprocs(vector<string> tokens) {
 		cout << str << endl;
 }
 void dorun(vector<string> tokens) {
+	if (tokens.size() < 2) {
+		errorchecker(tokens, 2);
+		return;
+	}
 	char* const args[tokens.size()-1];
 	int pid = fork();
 	//char* const args[] = {"ls","/usr"};
