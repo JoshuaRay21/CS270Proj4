@@ -140,7 +140,8 @@ void dorun(vector<string> tokens, int which) {
 	if (pid != firstFork && which == 1) {
 		procs.push_back(tokens[1]);
 		waitpid(pid, NULL, 0); 
-		procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
+		//TAKING THIS LINE OUT
+		//procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
 		printf("Done executing!\n");
 		exit(1);
 	}
