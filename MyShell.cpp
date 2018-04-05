@@ -102,7 +102,8 @@ void showprocs(vector<string> tokens) {
 }
 //which is 0 for run, 1 for fly, 2 for tovar
 void dorun(vector<string> tokens, int which) {
-	printf("Doing a run!\n");
+	if (which == 0)
+		printf("Doing a run!\n");
 	if (tokens.size() < 2) {
 		errorchecker(tokens, 2);
 		return;
@@ -152,7 +153,7 @@ void dorun(vector<string> tokens, int which) {
 void dofly(vector<string> tokens) {
 	printf("Doing a fly!\n");
 	dorun(tokens, 1);
-	printf("Done flying!\n");
+	//printf("Done flying!\n");
 }
 void dotovar(vector<string> tokens) {
 }
