@@ -110,8 +110,8 @@ void dorun(vector<string> tokens, int which) {
 	}
 	for (int i = 0; i < tokens.size(); i++) {
 		if (tokens[i].substr(0, 1) == "^") {
-			cout << tokens[i] << " is being changed to " << variables.find(tokens[i])->second << endl;
-			tokens[i] = variables.find(tokens[i])->second;
+			cout << tokens[i].substr(1) << " is being changed to " << variables.find(tokens[i].substr(1))->second << endl;
+			tokens[i] = variables.find(tokens[i].substr(1))->second;
 		}
 	}
 	char* args[tokens.size()];
