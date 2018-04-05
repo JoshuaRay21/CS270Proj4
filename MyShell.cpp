@@ -21,7 +21,7 @@ void setvar(vector<string> tokens);
 void dorun(vector<string> tokens);
 void dofly(vector<string> tokens);
 void dotovar(vector<string> tokens);
-bool errorchecker(vector<string> tokens, int wantedarguements);
+bool errorchecker(vector<string> tokens, int wantedarguments);
 void showprocs(vector<string> tokens);
 void done(vector<string> tokens);
 int setdir(vector<string> tokens);
@@ -176,18 +176,18 @@ int setdir(vector<string> tokens) {
 	return 0;
 }
 //returns true if there is an error relating to number of tokens
-bool errorchecker(vector<string> tokens, int wantedarguements) {
-	if (tokens.size()>wantedarguements) {
-		if (tokens[wantedarguements] != "#") {
+bool errorchecker(vector<string> tokens, int wantedarguments) {
+	if (tokens.size()>wantedarguments) {
+		if (tokens[wantedarguments] != "#") {
 			fprintf(stderr,"Too many arguements for %s\n", tokens[0].c_str());
 			return true;
 		}
 	}
-	if (tokens.size() < wantedarguements) {
+	if (tokens.size() < wantedarguments) {
 		fprintf(stderr,"Too few arguements for %s\n", tokens[0].c_str());
 		return true;
 	}
-	for (int i = 1; i < wantedarguements; i++) {
+	for (int i = 1; i < wantedarguments; i++) {
 		if (tokens[i]=="#") {
 			fprintf(stderr, "Too few arguements for %s\n", tokens[0].c_str());
 			return true;
