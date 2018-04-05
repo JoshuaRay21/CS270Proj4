@@ -139,8 +139,9 @@ void dorun(vector<string> tokens, int which) {
 	
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
-		printf("Pushing proc: %s", tokens[1].c_str());
+		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
+		printf("There are now %d procs.\n", procs.size());
 		execvp(args[0], args);
 	}
 	if (pid != firstFork && which == 1) {
