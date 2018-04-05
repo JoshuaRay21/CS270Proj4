@@ -116,7 +116,7 @@ void dorun(vector<string> tokens) {
 	printf("PID: %d\n", pid);
 	if (pid==0) {
 		printf("executing %s...\n", args[0]);
-		execvp(args[0], args);
+		execv(args[0], args);
 	}
 }
 /*
