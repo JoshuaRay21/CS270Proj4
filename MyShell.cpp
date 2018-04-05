@@ -112,7 +112,7 @@ void dorun(vector<string> tokens) {
 	for (int i = 1; i < tokens.size(); i++) {
 		//args[i-1] = (char*)tokens[i];
 		string param = tokens[i];
-		cout << tokens << i << " is " << param << endl;
+		cout << "tokens " << i << " is " << param << endl;
 		if (param[0] == '^') {
 			param = variables.find(param.substr(1))->second;
 		}
