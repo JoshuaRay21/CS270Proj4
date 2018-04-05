@@ -148,7 +148,7 @@ void dorun(vector<string> tokens, int which) {
 		waitpid(pid, NULL, 0);
 	}
 
-	//printf("Done running!\n");
+	printf("Continuing...\n");
 }
 void dofly(vector<string> tokens) {
 	printf("Doing a fly!\n");
