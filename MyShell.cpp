@@ -48,26 +48,25 @@ vector<string> createtokens(string str) {
 	return tokens;
 }
 void execcommand(vector<string> tokens) {
+	if (tokens.size() == 0) {
+		return;
+	}
 	string command = tokens[0];
 	if (command == "setvar") {
 		setvar(tokens);
-	}
-	else if (command == "setprompt") {
+	} else if (command == "setprompt") {
 		changeprompt(tokens);
-	}
-	else if (command == "setdir") {
+	} else if (command == "setdir") {
 		setdir(tokens);
-	}
-	else if (command == "showprocs") {
+	} else if (command == "showprocs") {
 		showprocs(tokens);
-	}
-	else if (command == "#") {
+	} else if (command == "#") {
 		//nothing belongs in here, because this means the entire line is a comment
-	}
-	else if (command == "done") {
+	} else if (command == "done") {
 		done(tokens);
-	}
-	else if (command == "run") {
+	} else if (command == "run") {
+		dorun(tokens, 0);
+	} else if (command == "fly") {
 		dorun(tokens, 0);
 	}
 	//keep creating else if's for rest of commands
@@ -103,6 +102,7 @@ void showprocs(vector<string> tokens) {
 }
 //which is 0 for run, 1 for fly, 2 for tovar
 void dorun(vector<string> tokens, int which) {
+	printf("Doing a run!\n");
 	if (tokens.size() < 2) {
 		errorchecker(tokens, 2);
 		return;
@@ -125,11 +125,14 @@ void dorun(vector<string> tokens, int which) {
 	if (pid==0) {
 		printf("Executing %s...\n", args[0]);
 		execvp(args[0], args);
-		printf("Done executing!", args[0]);
+		printf("Done executing!\n");
 	}
-	waitpid(pid, NULL, 0);
+	if(which == 0) {
+		waitpid(pid, NULL, 0);
+	}
 }
 void dofly(vector<string> tokens) {
+	dorun(tokens, 1);
 }
 void dotovar(vector<string> tokens) {
 }
