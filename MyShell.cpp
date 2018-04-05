@@ -113,6 +113,7 @@ void dorun(vector<string> tokens) {
 		//args[i-1] = (char*)tokens[i];
 		args[i - 1] = const_cast<char*>(tokens[i].c_str());
 	}
+	args[tokens.size() - 1] = NULL;
 	printf("PID: %d\n", pid);
 	//printing args to see what args consists of
 	for (int i = 0; i < tokens.size(); i++) {
@@ -120,7 +121,7 @@ void dorun(vector<string> tokens) {
 	}
 	if (pid==0) {
 		printf("executing %s...\n", args[0]);
-		execv(args[0], args);
+		execvp(args[0], args);
 	}
 }
 /*
