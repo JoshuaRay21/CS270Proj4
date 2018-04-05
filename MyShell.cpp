@@ -107,7 +107,7 @@ void dorun(vector<string> tokens, int which) {
 		errorchecker(tokens, 2);
 		return;
 	}
-	for (int i = 0; i<tokens.size()) {
+	for (int i = 0; i < tokens.size(); i++) {
 		if (tokens[i].substr(0, 1) == "^") {
 			tokens[i] = variables.find(tokens[i])->second;
 		}
