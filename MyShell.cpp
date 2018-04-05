@@ -112,19 +112,20 @@ void dorun(vector<string> tokens, int which) {
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
 		//}
-		printf("adding token `%s` to `args` array in position `%d`.\n", tokens[i].c_str(), i);
+		//printf("adding token `%s` to `args` array in position `%d`.\n", tokens[i].c_str(), i);
 		args[i-1] = const_cast<char*>(tokens[i].c_str());
 	}
 	args[tokens.size() - 1] = NULL;
-	printf("Full contents of args array:\n");
-	for (int i = 0; i < sizeof(args)/sizeof(args[0]); i++) {
-		printf("ARG %d: %s\n", i, args[i]);
-	}
+	//printf("Full contents of args array:\n");
+	//for (int i = 0; i < sizeof(args)/sizeof(args[0]); i++) {
+	//	printf("ARG %d: %s\n", i, args[i]);
+	//}
 	int pid = fork();
-	printf("PID: %d\n", pid);
+	printf("My PID is %d.\n", pid);
 	if (pid==0) {
-		printf("executing %s...\n", args[0]);
+		printf("Executing %s...\n", args[0]);
 		execvp(args[0], args);
+		printf("Done executing!", args[0]);
 	}
 }
 void dofly(vector<string> tokens) {
