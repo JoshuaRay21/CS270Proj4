@@ -115,7 +115,7 @@ void dorun(vector<string> tokens) {
 		if (param[0] == '^') {
 			param = variables.find(param.substr(1))->second;
 		}
-		args[i - 1] = const_cast<char*>(.c_str());
+		args[i - 1] = const_cast<char*>(param.c_str());
 	}
 	args[tokens.size() - 1] = NULL;
 	printf("PID: %d\n", pid);
