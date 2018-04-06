@@ -148,7 +148,7 @@ void dorun(vector<string> tokens, int which) {
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		printf("There are now %d procs.\n", procs.size());
-		execvpe(args[0], args, path);
+		execve(args[0], args, path);
 		fprintf(stderr, "Execv did not work \n");
 		exit(1);
 	}
