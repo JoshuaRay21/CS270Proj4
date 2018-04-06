@@ -75,6 +75,9 @@ void execcommand(vector<string> tokens) {
 	else if (command == "tovar") {
 		dotovar(tokens);
 	}
+	else {
+		fprintf(stderr, "%s is not a valid command", command);
+	}
 	
 	//keep creating else if's for rest of commands
 }
