@@ -137,7 +137,7 @@ void dorun(vector<string> tokens, int which) {
 	//}
 	int pid = fork();
 	int firstFork = pid;
-	if (pid == 0) {
+	if (pid == 0 && which == 1) {
 		pid = fork();
 	}
 	printf("My PID is %d.\n", pid);
@@ -147,7 +147,9 @@ void dorun(vector<string> tokens, int which) {
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		printf("There are now %d procs.\n", procs.size());
-		execv(path, args, environ);
+		execv(path, args);
+		fprintf(stderr, "Execv did not work \n");
+		exit(1);
 	}
 	if (pid != firstFork && which == 1) {
 		waitpid(pid, NULL, 0); 
