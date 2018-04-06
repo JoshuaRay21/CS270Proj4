@@ -121,7 +121,7 @@ void dorun(vector<string> tokens, int which) {
 		}
 	}
 	char* args[tokens.size()];
-	string pathstring = variables.find("PATH")->second + "/" + tokens[1];
+	string pathstring = variables.find("PATH")->second;
 	char* path = const_cast<char*>(pathstring.c_str());
 	for (int i=1; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
@@ -148,7 +148,7 @@ void dorun(vector<string> tokens, int which) {
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		printf("There are now %d procs.\n", procs.size());
-		execv(path, args);
+		execvpe(args[0], args, path);
 		fprintf(stderr, "Execv did not work \n");
 		exit(1);
 	}
