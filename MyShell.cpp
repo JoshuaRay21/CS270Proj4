@@ -107,23 +107,23 @@ void done(vector<string> tokens) {
 void showprocs(vector<string> tokens) {
 	if(errorchecker(tokens, 1))
 		return;
-	printf("Showing procs:\n");
+	//printf("Showing procs:\n");
 	for (auto str: procs) {
 		printf("PROC: %s",str.c_str());
 	}
-	printf("Done showing procs!\n");
+//	printf("Done showing procs!\n");
 }
 //which is 0 for run, 1 for fly, 2 for tovar
 void dorun(vector<string> tokens, int which) {
 	if (which == 0)
-		printf("Doing a run!\n");
+	//	printf("Doing a run!\n");
 	if (tokens.size() < 2) {
 		errorchecker(tokens, 2);
 		return;
 	}
 	for (int i = 0; i < tokens.size(); i++) {
 		if (tokens[i].substr(0, 1) == "^") {
-			cout << tokens[i].substr(1) << " is being changed to " << variables.find(tokens[i].substr(1))->second << endl;
+			//cout << tokens[i].substr(1) << " is being changed to " << variables.find(tokens[i].substr(1))->second << endl;
 			tokens[i] = variables.find(tokens[i].substr(1))->second;
 		}
 	}
@@ -147,11 +147,11 @@ void dorun(vector<string> tokens, int which) {
 	if (pid == 0 && which == 1) {
 		pid = fork();
 	}
-	printf("My PID is %d.\n", pid);
+	//printf("My PID is %d.\n", pid);
 	
 	if (pid==0) {
 	//	cout << "Path: " << path << endl;
-		printf("Executing %s...\n", args[0]);
+	//	printf("Executing %s...\n", args[0]);
 		//printf("Pushing proc: %s\n", tokens[1].c_str());
 		//procs.push_back(tokens[1]);
 		//printf("There are now %d procs.\n", procs.size());
@@ -172,22 +172,22 @@ void dorun(vector<string> tokens, int which) {
 		}
 		//TAKING THIS LINE OUT
 		//procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
-		printf("Done executing %s!\n", args[0]);
+	//	printf("Done executing %s!\n", args[0]);
 		exit(1);
 	}
 	if(which == 0) {
 		waitpid(pid, NULL, 0);
 	}
 
-	printf("Continuing...\n");
+//	printf("Continuing...\n");
 }
 void dofly(vector<string> tokens) {
-	printf("Doing a fly!\n");
+//	printf("Doing a fly!\n");
 	dorun(tokens, 1);
 	//printf("Done flying!\n");
 }
 void dotovar(vector<string> tokens) {
-	printf("Doing a tovar!\n");
+	//printf("Doing a tovar!\n");
 	dorun(tokens, 3);
 }
 void setvar(vector<string> tokens) {
@@ -262,11 +262,11 @@ int main() {
 	variables["PATH"] = "/bin:/usr/bin";
 	string command;
 	vector<string> parameters;
-	string envp = "PATH";
+	//string envp = "PATH";
 	while (true) {
 		cout << prompt;
 		getline(cin, command);
-		cout << "Command: \"" << command << "\"!\n";
+	//	cout << "Command: \"" << command << "\"!\n";
 		vector<string> tokens = createtokens(command);
 		execcommand(tokens);
 		if (exiting > -1) {
