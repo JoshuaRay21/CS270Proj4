@@ -121,7 +121,8 @@ void dorun(vector<string> tokens, int which) {
 		}
 	}
 	char* args[tokens.size()];
-	tokens[1] = variables.find("PATH")->second + "/" + tokens[1];
+	path = variables.find("PATH")->second + "/" + tokens[1];
+	extern char * const environ[];
 	for (int i=1; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
@@ -146,7 +147,7 @@ void dorun(vector<string> tokens, int which) {
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		printf("There are now %d procs.\n", procs.size());
-		execvp(args[0], args);
+		execve(path, args, environ);
 	}
 	if (pid != firstFork && which == 1) {
 		waitpid(pid, NULL, 0); 
