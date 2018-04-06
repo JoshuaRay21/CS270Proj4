@@ -7,6 +7,8 @@
 #include <map>
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 #define MAX_ARGS 20
