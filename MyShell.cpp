@@ -33,7 +33,7 @@ string prompt = "msh > ";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
 //string path = "/bin:/usr/bin";
-variables["PATH"] = "/bin:/usr/bin";
+
 
 vector<string> createtokens(string str) {
 	istringstream iss(str);
@@ -239,6 +239,7 @@ void changeprompt(vector<string> tokens) {
 }
 
 int main() {
+	variables["PATH"] = "/bin:/usr/bin";
 	string command;
 	vector<string> parameters;
 	string envp = "PATH";
