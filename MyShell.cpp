@@ -32,7 +32,8 @@ map<string, string> variables; //1st string is the name, 2nd is value
 string prompt = "msh > ";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
-string path = "/bin:/usr/bin";
+//string path = "/bin:/usr/bin";
+map["PATH"] = "/bin:/usr/bin";
 
 vector<string> createtokens(string str) {
 	istringstream iss(str);
@@ -118,6 +119,7 @@ void dorun(vector<string> tokens, int which) {
 		}
 	}
 	char* args[tokens.size()];
+	tokens[1] = variables.find("PATH")->second + "/" + tokens[1];
 	for (int i=1; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
@@ -146,9 +148,13 @@ void dorun(vector<string> tokens, int which) {
 	}
 	if (pid != firstFork && which == 1) {
 		waitpid(pid, NULL, 0); 
+		string argsString = args[0];
+		for (int i = 1; i < (tokens.size() - 1); i++) {
+			argsString = argsString + " " + args[i]
+		}
 		//TAKING THIS LINE OUT
 		//procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
-		printf("Done executing!\n");
+		printf("Done executing %s!\n", args[0]);
 		exit(1);
 	}
 	if(which == 0) {
@@ -189,9 +195,6 @@ void setvar(vector<string> tokens) {
 	string value = tokens[2];
 	if (variable == "ShowTokens") {
 		showtokens = value;
-	}
-	else if (variable == "PATH") {
-		path = value;
 	}
 	else
 		variables[variable] = value;
