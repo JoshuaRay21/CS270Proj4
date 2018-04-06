@@ -120,18 +120,16 @@ void dorun(vector<string> tokens, int which) {
 			tokens[i] = variables.find(tokens[i].substr(1))->second;
 		}
 	}
-	char* args[tokens.size()-1];
+	char* args[tokens.size()];
 	tokens[1] = variables.find("PATH")->second + "/" + tokens[1];
-	char *const path = const_cast<char*>(tokens[1].c_str());
-	for (int i=2; i<tokens.size(); i++) {
+	for (int i=1; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
 		//}
 		//printf("adding token `%s` to `args` array in position `%d`.\n", tokens[i].c_str(), i);
-		args[i-2] = const_cast<char*>(tokens[i].c_str());
+		args[i-1] = const_cast<char*>(tokens[i].c_str());
 	}
-	
-	args[tokens.size() - 2] = NULL;
+	args[tokens.size() - 1] = NULL;
 	//printf("Full contents of args array:\n");
 	//for (int i = 0; i < sizeof(args)/sizeof(args[0]); i++) {
 	//	printf("ARG %d: %s\n", i, args[i]);
@@ -148,7 +146,7 @@ void dorun(vector<string> tokens, int which) {
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
 		printf("There are now %d procs.\n", procs.size());
-		execvp(path, args);
+		execvp(args[0], args);
 	}
 	if (pid != firstFork && which == 1) {
 		waitpid(pid, NULL, 0); 
