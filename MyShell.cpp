@@ -33,7 +33,7 @@ string prompt = "msh > ";
 vector<string> procs; //vec of processes running in background
 int exiting = -1; //this int is changed if done is called, if this is non neg, msh exits
 //string path = "/bin:/usr/bin";
-map["PATH"] = "/bin:/usr/bin";
+variables["PATH"] = "/bin:/usr/bin";
 
 vector<string> createtokens(string str) {
 	istringstream iss(str);
@@ -150,7 +150,7 @@ void dorun(vector<string> tokens, int which) {
 		waitpid(pid, NULL, 0); 
 		string argsString = args[0];
 		for (int i = 1; i < (tokens.size() - 1); i++) {
-			argsString = argsString + " " + args[i]
+			argsString = argsString + " " + args[i];
 		}
 		//TAKING THIS LINE OUT
 		//procs.erase(remove(procs.begin(), procs.end(), tokens[1]), procs.end());
