@@ -123,14 +123,14 @@ void dorun(vector<string> tokens, int which) {
 	char* args[tokens.size()];
 	string pathstring = variables.find("PATH")->second;
 	char* path = pathstring.c_str();
-	for (int i=1; i<tokens.size(); i++) {
-		//if (param[0] == '^') {
-		//	param = variables.find(param.substr(1))->second;
-		//}
-		//printf("adding token `%s` to `args` array in position `%d`.\n", tokens[i].c_str(), i);
-		args[i-1] = const_cast<char*>(tokens[i].c_str());
+	int sizedif = 1;
+	if (which == 3) {
+		sizedif = 2;
 	}
-	args[tokens.size() - 1] = NULL;
+	for (int i=sizedif; i<tokens.size(); i++) {
+				args[i-sizedif] = const_cast<char*>(tokens[i].c_str());
+	}
+	args[tokens.size() - sizedif] = NULL;
 	//printf("Full contents of args array:\n");
 	//for (int i = 0; i < sizeof(args)/sizeof(args[0]); i++) {
 	//	printf("ARG %d: %s\n", i, args[i]);
@@ -143,12 +143,17 @@ void dorun(vector<string> tokens, int which) {
 	printf("My PID is %d.\n", pid);
 	
 	if (pid==0) {
-		cout << "Path: " << path << endl;
+	//	cout << "Path: " << path << endl;
 		printf("Executing %s...\n", args[0]);
-		printf("Pushing proc: %s\n", tokens[1].c_str());
-		procs.push_back(tokens[1]);
-		printf("There are now %d procs.\n", procs.size());
-		execvp(args[0], args);
+		//printf("Pushing proc: %s\n", tokens[1].c_str());
+		//procs.push_back(tokens[1]);
+		//printf("There are now %d procs.\n", procs.size());
+		if (which == 3) {
+			variables[tokens[1]] = execvp(args[0], args);
+		}
+		else {
+			execvp(args[0], args);
+		}
 		fprintf(stderr, "Execv did not work \n");
 		exit(1);
 	}
@@ -175,6 +180,8 @@ void dofly(vector<string> tokens) {
 	//printf("Done flying!\n");
 }
 void dotovar(vector<string> tokens) {
+	printf("Doing a tovar!\n");
+	dorun(tokens, 3);
 }
 void setvar(vector<string> tokens) {
 	if (errorchecker(tokens, 3)) {
