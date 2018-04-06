@@ -143,6 +143,7 @@ void dorun(vector<string> tokens, int which) {
 	printf("My PID is %d.\n", pid);
 	
 	if (pid==0) {
+		cout << "Path: " << path << endl;
 		printf("Executing %s...\n", args[0]);
 		printf("Pushing proc: %s\n", tokens[1].c_str());
 		procs.push_back(tokens[1]);
