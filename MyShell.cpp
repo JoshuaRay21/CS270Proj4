@@ -72,6 +72,10 @@ void execcommand(vector<string> tokens) {
 	} else if (command == "fly") {
 		dofly(tokens);
 	}
+	else if (command == "tovar") {
+		dotovar(tokens);
+	}
+	
 	//keep creating else if's for rest of commands
 }
 void done(vector<string> tokens) {
@@ -122,7 +126,7 @@ void dorun(vector<string> tokens, int which) {
 	}
 	char* args[tokens.size()];
 	string pathstring = variables.find("PATH")->second;
-	char* path = pathstring.c_str();
+	//char* path = pathstring.c_str();
 	int sizedif = 1;
 	if (which == 3) {
 		sizedif = 2;
