@@ -122,7 +122,7 @@ void dorun(vector<string> tokens, int which) {
 	}
 	char* args[tokens.size()-1];
 	tokens[1] = variables.find("PATH")->second + "/" + tokens[1];
-	char *const path = tokens[1].c_str();
+	char *const path = const_cast<char*>(tokens[1].c_str());
 	for (int i=2; i<tokens.size(); i++) {
 		//if (param[0] == '^') {
 		//	param = variables.find(param.substr(1))->second;
